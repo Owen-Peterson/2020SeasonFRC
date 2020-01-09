@@ -7,8 +7,10 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.PWMSpeedController;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class drivetrain extends SubsystemBase {
@@ -16,16 +18,26 @@ public class drivetrain extends SubsystemBase {
    * Creates a new drivetrain.
    */
   public drivetrain() {
+    int arcadeDrive;
 
     //Motor controllers for 4 drive motors
-    Spark spark0 = new Spark(0);
-    Spark spark1 = new Spark(1);
-    Spark spark2 = new Spark(2);
-    Spark spark3 = new Spark(3);
+    SpeedController m_frontLeft = new Spark(0);
+    SpeedController m_frontRight = new Spark(1);
+    SpeedController m_rearLeft = new Spark(2);
+    SpeedController m_rearRight = new Spark(3);
+   
+    //Speed Controller Groups that allow independent 
+    SpeedControllerGroup driveLeft = new SpeedControllerGroup(m_frontLeft, m_rearLeft);
+    SpeedControllerGroup driveRight = new SpeedControllerGroup(m_frontRight, m_rearRight);
 
+    DifferentialDrive m_drive = new DifferentialDrive(driveLeft, driveRight);
+  
+
+    }
+    //DifferentialDrive
      
     
-  }
+  
 
   @Override
   public void periodic() {
