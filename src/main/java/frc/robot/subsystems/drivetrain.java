@@ -18,8 +18,7 @@ public class drivetrain extends SubsystemBase {
    * Creates a new drivetrain.
    */
   public drivetrain() {
-    int arcadeDrive;
-
+  
     //Motor controllers for 4 drive motors
     SpeedController m_frontLeft = new Spark(0);
     SpeedController m_frontRight = new Spark(1);
@@ -34,6 +33,8 @@ public class drivetrain extends SubsystemBase {
   
 
     }
+    
+  
     //DifferentialDrive
      
     
