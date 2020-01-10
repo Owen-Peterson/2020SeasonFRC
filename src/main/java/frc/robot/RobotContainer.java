@@ -31,7 +31,7 @@ public class RobotContainer {
 
   private final Joystick controller1 = new Joystick(0);
 
-  private final Drivetrain drivetrain = new Drivetrain();
+  private final Drivetrain drivetrain = new Drivetrain(controller1);
 
     
 
@@ -41,11 +41,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    CommandScheduler.getInstance().schedule(new RunCommand(() -> drivetrain.m_drive.arcadeDrive(
-      controller1.getY(GenericHID.Hand.kLeft),
-      controller1.getX(GenericHID.Hand.kLeft)),
-      drivetrain));
-    
+    CommandScheduler.getInstance().registerSubsystem(drivetrain);
   }
 
   /**
@@ -55,6 +51,10 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    CommandScheduler.getInstance().schedule(new RunCommand(() -> drivetrain.m_drive.arcadeDrive(
+      controller1.getY(GenericHID.Hand.kLeft),
+      controller1.getX(GenericHID.Hand.kLeft)),
+      drivetrain));
   }
 
 

@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -17,10 +19,14 @@ public class Drivetrain extends SubsystemBase {
 
   public DifferentialDrive m_drive;
 
+  public Joystick controller1;
+
   /**
    * Creates a new drivetrain.
    */
-  public Drivetrain() {
+  public Drivetrain(Joystick controller1) {
+
+    this.controller1 = controller1;
   
     //Motor controllers for 4 drive motors
     SpeedController m_frontLeft = new Spark(0);
@@ -40,5 +46,7 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    m_drive.arcadeDrive(controller1.getY(GenericHID.Hand.kLeft),
+    controller1.getX(GenericHID.Hand.kLeft));
   }
 }
