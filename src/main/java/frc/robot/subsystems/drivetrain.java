@@ -13,32 +13,29 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class drivetrain extends SubsystemBase {
+public class Drivetrain extends SubsystemBase {
+
+  public DifferentialDrive m_drive;
+
   /**
    * Creates a new drivetrain.
    */
-  public drivetrain() {
+  public Drivetrain() {
   
     //Motor controllers for 4 drive motors
     SpeedController m_frontLeft = new Spark(0);
-    SpeedController m_frontRight = new Spark(1);
-    SpeedController m_rearLeft = new Spark(2);
+    SpeedController m_rearLeft = new Spark(1);
+    SpeedController m_frontRight = new Spark(2);
     SpeedController m_rearRight = new Spark(3);
    
-    //Speed Controller Groups that allow independent 
+    //Speed Controller Groups that allow independent motor control for seperate sides
     SpeedControllerGroup driveLeft = new SpeedControllerGroup(m_frontLeft, m_rearLeft);
     SpeedControllerGroup driveRight = new SpeedControllerGroup(m_frontRight, m_rearRight);
 
-    DifferentialDrive m_drive = new DifferentialDrive(driveLeft, driveRight);
+    m_drive = new DifferentialDrive(driveLeft, driveRight);
   
 
-    }
-    
-  
-    //DifferentialDrive
-     
-    
-  
+    }  
 
   @Override
   public void periodic() {

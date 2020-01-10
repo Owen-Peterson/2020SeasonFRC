@@ -11,8 +11,11 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -26,7 +29,11 @@ public class RobotContainer {
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
+  private final Joystick controller1 = new Joystick(0);
 
+  private final Drivetrain drivetrain = new Drivetrain();
+
+    
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -34,7 +41,10 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    Joystick controller1;
+    CommandScheduler.getInstance().schedule(new RunCommand(() -> drivetrain.m_drive.arcadeDrive(
+      controller1.getY(GenericHID.Hand.kLeft),
+      controller1.getX(GenericHID.Hand.kLeft)),
+      drivetrain));
     
   }
 
