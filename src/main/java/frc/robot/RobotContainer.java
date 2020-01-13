@@ -57,7 +57,7 @@ public class RobotContainer {
       drivetrain));
   }
 
-  // This comment is worthless.
+  
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
