@@ -19,14 +19,14 @@ public class Drivetrain extends SubsystemBase {
 
   public DifferentialDrive m_drive;
 
-  public Joystick controller1;
+  
 
   /**
    * Creates a new drivetrain.
    */
-  public Drivetrain(Joystick controller1) {
+  public  Drivetrain() {
 
-    this.controller1 = controller1;
+    
   
     //Motor controllers for 4 drive motors
     SpeedController m_frontLeft = new Spark(0);
@@ -38,15 +38,29 @@ public class Drivetrain extends SubsystemBase {
     SpeedControllerGroup driveLeft = new SpeedControllerGroup(m_frontLeft, m_rearLeft);
     SpeedControllerGroup driveRight = new SpeedControllerGroup(m_frontRight, m_rearRight);
 
-    m_drive = new DifferentialDrive(driveLeft, driveRight);
+    //m_drive = new DifferentialDrive(driveLeft, driveRight);
   
 
     }  
 
+    public void teleop(double x, double y){
+      tankDrive(x,y);
+      }
+
+
+    private void tankDrive(double incomingX, double incomingY){
+
+      
+    
+    }
+    
+    
+    
+    
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    m_drive.arcadeDrive(controller1.getY(GenericHID.Hand.kLeft),
-    controller1.getX(GenericHID.Hand.kLeft));
+    
   }
 }
